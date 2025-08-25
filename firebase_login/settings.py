@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'sua-chave-secreta-aqui')
@@ -80,7 +82,6 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static'] 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -96,3 +97,4 @@ FIREBASE_CONFIG = {
     'messagingSenderId': os.getenv('FIREBASE_MESSAGING_SENDER_ID'),
     'appId': os.getenv('FIREBASE_APP_ID'),
 }
+

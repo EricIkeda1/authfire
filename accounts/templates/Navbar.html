@@ -11,14 +11,19 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">Sistema de Login</a>
-            <div class="navbar-nav ms-auto">
-                {% if user.is_authenticated %}
-                    <span class="navbar-text me-3">Olá, {{ user.email }}</span>
-                    <a class="nav-link" href="{% url 'logout' %}">Sair</a>
-                {% else %}
-                    <a class="nav-link" href="{% url 'login' %}">Entrar</a>
-                    <a class="nav-link" href="{% url 'register' %}">Cadastrar</a>
-                {% endif %}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        <span class="navbar-text me-3">Olá, {{ user.email }}</span>
+                        <a class="nav-link" href="{% url 'logout' %}">Sair</a>
+                    {% else %}
+                        <a class="nav-link" href="{% url 'login' %}">Entrar</a>
+                        <a class="nav-link" href="{% url 'register' %}">Cadastrar</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </nav>

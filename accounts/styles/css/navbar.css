@@ -5,6 +5,56 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* ===== LINKS ===== */
+a {
+    color: #0d6efd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0a58ca;
+    text-decoration: underline;
+}
+
+/* ===== BADGES ===== */
+.badge {
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* ===== UTILITIES ===== */
+.text-gradient {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.shadow-custom {
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* ===== NAVBAR ===== */
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.navbar-text {
+    color: #e9ecef !important;
+}
+
+.nav-link {
+    color: #e9ecef !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffffff !important;
+}
+
 /* ===== CONTAINER DE AUTENTICAÇÃO ===== */
 .auth-container {
     max-width: 400px;
@@ -56,25 +106,6 @@ body {
     background: linear-gradient(135deg, #0a58ca 0%, #084298 100%);
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
-}
-
-/* ===== NAVBAR ===== */
-.navbar-brand {
-    font-weight: 700;
-    font-size: 1.5rem;
-}
-
-.navbar-text {
-    color: #e9ecef !important;
-}
-
-.nav-link {
-    color: #e9ecef !important;
-    transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-    color: #ffffff !important;
 }
 
 /* ===== ALERTAS ===== */
@@ -169,33 +200,25 @@ body {
     animation: fadeIn 0.6s ease-out;
 }
 
-/* ===== LINKS ===== */
-a {
-    color: #0d6efd;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: #0a58ca;
-    text-decoration: underline;
-}
-
-/* ===== BADGES ===== */
-.badge {
-    padding: 8px 12px;
-    border-radius: 20px;
-    font-weight: 600;
-}
-
-/* ===== UTILITIES ===== */
-.text-gradient {
-    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.shadow-custom {
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15) !important;
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+    
+    .navbar-nav {
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .navbar-nav .nav-link {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    
+    .navbar-text {
+        margin-right: 0.5rem !important;
+        padding: 0.25rem 0;
+    }
 }

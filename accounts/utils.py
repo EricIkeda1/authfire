@@ -7,15 +7,51 @@ User = get_user_model()
 
 def get_or_create_user(username, email, firebase_uid, email_verified=False):
     try:
+        try:
+            user = User.objects.get(firebase_uid=firebase_uid)
+            print(f"✅ Usuário encontrado por UID: {user.email}")
+            return user
+        except (ObjectDoesNotExist, AttributeError):
+            pass
+        
         user = User.objects.get(email=email)
+        print(f"✅ Usuário encontrado por email: {user.email}")
+        
+        try:
+            if hasattr(user, 'firebase_uid') and not user.firebase_uid:
+                user.firebase_uid = firebase_uid
+                user.email_verified = email_verified
+                user.save()
+                print(f"🔄 UID adicionado ao usuário existente: {user.email}")
+        except AttributeError:
+            pass
+            
         return user
+        
     except ObjectDoesNotExist:
+        username = email.split('@')[0]  
+        counter = 1
+        original_username = username
+        
+        while User.objects.filter(username=username).exists():
+            username = f"{original_username}{counter}"
+            counter += 1
+        
         user = User.objects.create_user(
             username=username,
             email=email
         )
-        user.set_unusable_password()
+        
+        try:
+            user.firebase_uid = firebase_uid
+            user.email_verified = email_verified
+        except AttributeError:
+            pass
+            
+        user.set_unusable_password()  
         user.save()
+        
+        print(f"🎉 NOVO usuário criado no Django: {email}")
         return user
 
 def firebase_sign_in(email, password):

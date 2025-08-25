@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Cadastro{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2 class="text-center mb-4">Criar Conta</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <div class="mb-3">
+            <label for="id_email" class="form-label">Email</label>
+            {{ form.email }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_password" class="form-label">Senha</label>
+            {{ form.password }}
+            <div class="form-text">Mínimo de 6 caracteres</div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_confirm_password" class="form-label">Confirmar Senha</label>
+            {{ form.confirm_password }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+    </form>
+    
+    <div class="text-center mt-3">
+        <p>Já tem uma conta? <a href="{% url 'login' %}">Faça login</a></p>
+    </div>
+</div>
+{% endblock %}

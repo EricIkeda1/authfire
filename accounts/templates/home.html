@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="display-4">Sistema de Login</h1>
+    <p class="lead">Sistema de autenticação com Django e Firebase</p>
+    
+    {% if user.is_authenticated %}
+        <div class="mt-4">
+            <p>Você está logado como <strong>{{ user.email }}</strong></p>
+            <p>Firebase UID: <code>{{ user.firebase_uid }}</code></p>
+        </div>
+    {% else %}
+        <div class="mt-4">
+            <p>Faça login ou cadastre-se para acessar o sistema.</p>
+            <a href="{% url 'login' %}" class="btn btn-primary me-2">Fazer Login</a>
+            <a href="{% url 'register' %}" class="btn btn-outline-primary">Criar Conta</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -5,12 +5,10 @@ from pathlib import Path
 
 def initialize_firebase():
     try:
-        # Verifica se o Firebase já foi inicializado
         if firebase_admin._apps:
             print("Firebase já está inicializado")
             return True
             
-        # Caminho para o arquivo de configuração do Firebase
         cred_path = Path(__file__).parent / 'firebase-service-account.json'
         
         if cred_path.exists():
@@ -27,5 +25,4 @@ def initialize_firebase():
         print(f"Erro ao inicializar Firebase: {e}")
         return False
 
-# Inicializar o Firebase quando o módulo for importado
 initialize_firebase()

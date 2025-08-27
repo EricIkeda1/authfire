@@ -1,7 +1,5 @@
 # Sistema de Login com Django + Firebase
 
-## Estrutura do Projeto
-
 ## Arquivos principais
 
 ### 1. `requirements.txt`

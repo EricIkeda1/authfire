@@ -1,5 +1,42 @@
 # Sistema de Login com Django + Firebase
 
+# Regras Importantes sobre a Estrutura do Django
+
+# Criar e ativar o ambiente virtual (venv) no Windows CMD
+
+Abra o **CMD** na raiz do projeto (onde estará o `manage.py`) e rode os seguintes comandos:
+
+## Criar e ativar o ambiente virtual (venv) no Windows CMD
+
+# Criar o ambiente virtual
+```
+python -m venv venv
+```
+
+# Ativar o ambiente virtual
+```
+venv\Scripts\activate
+```
+
+## Instalar as dependências
+
+# Ainda na raiz do projeto, com o ambiente virtual ativo, rode:
+```
+pip install -r requirements.txt
+```
+
+Isso instalará todas as bibliotecas necessárias, como Django, firebase-admin, gunicorn e python-dotenv.
+
+## `manage.py`
+
+- Deve sempre ficar **na raiz do projeto**, ao lado das pastas que contêm seus apps e do diretório do projeto (`firebase_login` no seu caso).  
+- É o **ponto de entrada do Django**, que chama `execute_from_command_line()` para processar comandos como `runserver`, `migrate`, etc.
+- **Para rodar o projeto localmente**, abra o terminal **nesta pasta** e execute:
+
+```
+python manage.py runserver
+```
+
 ## Arquivos principais
 
 ### 1. `requirements.txt`

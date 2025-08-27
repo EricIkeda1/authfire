@@ -29,8 +29,6 @@ Isso instalará todas as bibliotecas necessárias, como Django, firebase-admin, 
 
 ## `manage.py`
 
-- Deve sempre ficar **na raiz do projeto**, ao lado das pastas que contêm seus apps e do diretório do projeto (`firebase_login` no seu caso).  
-- É o **ponto de entrada do Django**, que chama `execute_from_command_line()` para processar comandos como `runserver`, `migrate`, etc.
 - **Para rodar o projeto localmente**, abra o terminal **nesta pasta** e execute:
 
 ```

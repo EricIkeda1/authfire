@@ -35,6 +35,14 @@ Isso instalará todas as bibliotecas necessárias, como Django, firebase-admin, 
 python manage.py runserver
 ```
 
+# Criar um superuser (administrador)
+
+Para acessar o Django Admin e gerenciar usuários, crie um superuser:
+```
+python manage.py createsuperuser
+```
+- Depois disso, você poderá acessar o painel administrativo em http://127.0.0.1:8000/admin/ usando este superuser.
+
 ## Arquivos principais
 
 ### 1. `requirements.txt`

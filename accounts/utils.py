@@ -2,6 +2,7 @@ import requests
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
+from .sync_utils import sync_firebase_users 
 
 User = get_user_model()
 
@@ -95,3 +96,7 @@ def firebase_sign_up(email, password):
             return False, error_message
     except Exception as e:
         return False, f"Erro de conexão: {str(e)}"
+
+def sync_users_command():
+    from .sync_utils import sync_firebase_users
+    return sync_firebase_users()

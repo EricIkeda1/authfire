@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
+from django.db.models.signals import post_save, post_delete, pre_delete
+from django.dispatch import receiver
+from firebase_config import create_firebase_user, update_firebase_user, delete_firebase_user
 
 class CustomUser(AbstractUser):
     firebase_uid = models.CharField(
@@ -48,3 +51,44 @@ class CustomUser(AbstractUser):
     
     def __str__(self):
         return self.email or self.username
+
+@receiver(post_save, sender=CustomUser)
+def sync_user_to_firebase(sender, instance, created, **kwargs):
+    if kwargs.get('raw', False) or kwargs.get('update_fields') == ['last_login']:
+        return
+    
+    try:
+        if created and not instance.firebase_uid:
+            firebase_uid = create_firebase_user(
+                email=instance.email,
+                display_name=instance.username
+            )
+            if firebase_uid:
+                CustomUser.objects.filter(pk=instance.pk).update(firebase_uid=firebase_uid)
+        
+        elif instance.firebase_uid and not created:
+            update_firebase_user(
+                uid=instance.firebase_uid,
+                email=instance.email,
+                display_name=instance.username,
+                email_verified=instance.email_verified
+            )
+            
+    except Exception as e:
+        print(f"❌ Erro ao sincronizar usuário para Firebase: {e}")
+
+@receiver(pre_delete, sender=CustomUser)
+def delete_user_from_firebase(sender, instance, **kwargs):
+    try:
+        if instance.firebase_uid:
+            delete_firebase_user(instance.firebase_uid)
+    except Exception as e:
+        print(f"❌ Erro ao deletar usuário do Firebase: {e}")
+
+def disable_firebase_sync():
+    post_save.disconnect(sync_user_to_firebase, sender=CustomUser)
+    pre_delete.disconnect(delete_user_from_firebase, sender=CustomUser)
+
+def enable_firebase_sync():
+    post_save.connect(sync_user_to_firebase, sender=CustomUser)
+    pre_delete.connect(delete_user_from_firebase, sender=CustomUser)
